@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
             adj[x].erase(p);
             adj[y].erase(p);
             edg[x].erase(p);
-            edg[x].erase(p);
+            edg[y].erase(p);
             bool xy = edg[x].find(y)==edg[x].end();
             bool px = edg[p].find(x)==edg[p].end();
             bool py = edg[p].find(y)==edg[p].end();
