@@ -14,20 +14,20 @@ unsigned long long int JosephusSurviver (unsigned long long int numPeople, unsig
 {
     if (numPeople >= skipLength)
     {
-        // exactly [numPeople/skipLength] people will be eliminated 
+        // exactly [numPeople/skipLength] people will be killed 
         // before a person is re-observed for elimination - a 'round'
-        auto numEliminatedPeople = numPeople/skipLength;
-        auto lastKilledInRoundIndex = numEliminatedPeople * skipLength;
+        auto numPeopleKilled = numPeople/skipLength;
+        auto lastKilledInRoundIndex = numPeopleKilled * skipLength;
         auto peopleSkippedAfterLastDead = numPeople - lastKilledInRoundIndex;
 
         // if you re-assign the values after the last elimination to 1-n
-        auto newIndexAfterFirstEliminationRound = JosephusSurviver(numPeople - numEliminatedPeople, skipLength);
+        auto newIndexAfterFirstRound = JosephusSurviver(numPeople - numPeopleKilled, skipLength);
 
         // converting back to the previous index accounting for dead and skipped people
-        auto indexAfterFirstEliminationRound = newIndexAfterFirstEliminationRound;
-        indexAfterFirstEliminationRound += (newIndexAfterFirstEliminationRound > peopleSkippedAfterLastDead) * (newIndexAfterFirstEliminationRound - peopleSkippedAfterLastDead - 1) / (skipLength - 1);
+        auto indexAfterFirstRound = newIndexAfterFirstRound;
+        indexAfterFirstRound += (newIndexAfterFirstRound > peopleSkippedAfterLastDead) * (newIndexAfterFirstRound - peopleSkippedAfterLastDead - 1) / (skipLength - 1);
 
-        return NonZeroModulus(lastKilledInRoundIndex + indexAfterFirstEliminationRound , numPeople);
+        return NonZeroModulus(lastKilledInRoundIndex + indexAfterFirstRound , numPeople);
     }
     else 
     {
